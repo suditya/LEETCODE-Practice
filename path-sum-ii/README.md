@@ -1,3 +1,4 @@
+[Discussion Post (created on 18/5/2021 at 14:8)](https://leetcode.com/problems/path-sum-ii/discuss/1280708/simple-recursive-without-helper-c%2B%2B-solutions)  
 <h2>113. Path Sum II</h2><h3>Medium</h3><hr><div><p>Given the <code>root</code> of a binary tree and an integer <code>targetSum</code>, return all <strong>root-to-leaf</strong> paths where each path's sum equals <code>targetSum</code>.</p>
 
 <p>A <strong>leaf</strong> is a node with no children.</p>
