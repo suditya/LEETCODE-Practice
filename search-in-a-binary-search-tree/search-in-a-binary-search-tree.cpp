@@ -20,9 +20,10 @@ public:
             else
             {
                 TreeNode* l=searchBST(root->left,val);
-                TreeNode* r=searchBST(root->right,val);
                 if(l!=NULL) return l;
-                 return r;
+                
+               return searchBST(root->right,val);
+              
                 // return 
             }
         }
