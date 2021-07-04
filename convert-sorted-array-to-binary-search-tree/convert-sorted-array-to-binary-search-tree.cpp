@@ -26,11 +26,10 @@ public:
                 l.push_back(nums[i]);
             for(int i=n/2+1;i<n;i++)
                 r.push_back(nums[i]);
-            TreeNode* lefty=sortedArrayToBST(l);
-            TreeNode* righty=sortedArrayToBST(r);
+           
             TreeNode* root= new TreeNode(nums[n/2]);
-            root->left=lefty;
-            root->right=righty;
+            root->left=sortedArrayToBST(l);;
+            root->right=sortedArrayToBST(r);;
             return root;
         }
         
