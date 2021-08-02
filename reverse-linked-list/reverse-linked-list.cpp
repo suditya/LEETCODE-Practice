@@ -19,6 +19,7 @@ public:
         {
            ListNode* h=reverseList(head->next);
            int x=head->val;
+           delete head;
            ListNode* temp=h;
            while(temp->next!=NULL)
                temp=temp->next;
