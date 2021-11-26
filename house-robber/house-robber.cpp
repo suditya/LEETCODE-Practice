@@ -19,6 +19,17 @@ public:
     
     int rob(vector<int>& nums) 
     {
-        return f(nums, nums.size());    
-    }
+         int n= nums.size();
+        int t[1001];
+        if(n==1) return nums[0];
+        t[0]=nums[0];
+        t[1]=max(nums[1],nums[0]);
+         
+        for( int i=2;i<n;i++)
+        {
+            t[i]=max((nums[i]+t[i-2]),t[i-1]);
+        }
+       return t[n-1];
+    }   
+    
 };
