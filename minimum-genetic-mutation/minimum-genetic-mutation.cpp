@@ -4,7 +4,7 @@ public:
     unordered_map<string, int> vis;
     unordered_map<string,int> dis;
     bool s=false, e=false;
-    void bfs(string start, string end,vector<string> bank )
+    void bfs(string start, string end,vector<string>& bank )
     {
         // int dis[1000];
         // for(int i=0;i<1000;i++)
