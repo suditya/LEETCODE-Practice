@@ -6,11 +6,7 @@ public:
     bool s=false, e=false;
     void bfs(string start, string end,vector<string>& bank )
     {
-        // int dis[1000];
-        // for(int i=0;i<1000;i++)
-        // {
-        //     dis[i]=INT_MAX;
-        // }
+        
         queue<string> q;
        
         for(int i=0;i<bank.size();i++)
@@ -82,22 +78,12 @@ public:
                 }
             }
         }
-        // vector<string> v=mp[start];
-        // cout<<start<<" ";
-        // for(int i=0;i<v.size();i++)
-        // {
-        //     cout<<v[i]<<" ";
-        // }
-        // cout<<"\n";
+     
          
         for(int i=0;i<bank.size();i++)
         {
             vis[bank[i]]=0;
         }
-        // if(s==false)
-            
-        
-
         bfs(start,end,bank);
         cout<<dis[end]<<" ";
         if(dis[end] >100)
