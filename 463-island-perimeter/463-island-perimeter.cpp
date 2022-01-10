@@ -15,9 +15,10 @@ public:
     void dfs(int i,int j,vector<vector<int>>& grid)
     {
         if(valid(i,j)==false) return ;
+        else if(vis[i][j]==1) return ;
         else
         {
-            if(vis[i][j]==1) return ;
+            
             vis[i][j]=1;
             ++land;
             cout<<i<<" "<<j<<"\n";
