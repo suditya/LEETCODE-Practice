@@ -1,47 +1,34 @@
 class Solution {
 public:
-    int count;
-    int vis[50009];
-    unordered_map<int,vector<int>> mp;
-    
-    void dfs(int x)
-    {
-        if(vis[x]==1) return ;
-        vis[x]=1;
-        vector<int> v= mp[x];
-        cout<<x;
-        for(int i=0;i<v.size();i++)
-        {
-            // cout<<v[i]<<" ";
-            if(v[i] >= 0)
-            {
-                if(vis[v[i]]==0)
-                {
-                    count=count+1;
-                    dfs(v[i]);
+    int minReorder(int n, vector<vector<int>>& connections) {
+        vector<int> visited(n);
+        vector<vector<int>> adj(n), back(n);
+        queue<int> q;
+        q.push(0);
+        int ans = 0;
+        
+        for (auto c : connections){
+            adj[c[0]].push_back(c[1]);
+            back[c[1]].push_back(c[0]);
+        }
+        
+        while (!q.empty()){
+            int curr = q.front();
+            q.pop();
+            visited[curr] = 1;
+
+            // change dir for all arrows facing out
+            for (auto a: adj[curr]){
+                if (!visited[a]){
+                    ans++;
+                    q.push(a);
                 }
             }
-            else
-            {
-                if(vis[-v[i]]==0)
-                {
-                    dfs(-v[i]);
-                }
+            // push other nodes so we visit everything
+            for (auto b: back[curr]){
+                if (!visited[b]) q.push(b);
             }
         }
-        return ;
-    }
-    
-    int minReorder(int n, vector<vector<int>>& connections) 
-    {
-      for(int i=0;i<connections.size();i++)
-      {
-          mp[connections[i][0]].push_back(connections[i][1]);
-          mp[connections[i][1]].push_back(-connections[i][0]);
-      }
-      count=0;
-      memset(vis,0,sizeof(vis));
-      dfs(0);
-      return count;  
+        return ans;
     }
 };
