@@ -8,26 +8,26 @@ public:
     {
         if (parent[i] == i)
             return i;
-        return parent[i]=find(parent[i]);
+        return parent[i]=find( parent[i]);
     }
     void _union(int u,int v)
     {
-        u=find(u);
+        int pu=find(u);
         // parent[u]=pu;
-        v=find(v);
+        int pv=find(v);
         // parent[v]=pv;
-        if(u != v)
+        if(pu != pv)
         {
            
-            if(u < v)
+            if(pu < pv)
             {
-                parent[v]=u;
+                parent[pv]=pu;
                 
             }
             else
-                parent[u]=v;
+                parent[pu]=pv;
         }
-        
+        return ;
     }
     
     int findCircleNum(vector<vector<int>>& isConnected) 
@@ -50,16 +50,13 @@ public:
                 
         }
         // cout<<find_parent(3);
-        
-        // set<int> s;
-        int count=0;
+        // cout<<find_parent(2);
+        set<int> s;
         for(int i=0;i<n;i++)
         {
-            // cout<<parent[i]<<" ";
-            if(parent[i]==i)
-                ++count;
-            // s.insert(parent[i]);
+            cout<<parent[i]<<" ";
+            s.insert(find(parent[i]));
         }
-        return count;
+        return s.size();
     }
 };
