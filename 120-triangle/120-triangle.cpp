@@ -6,9 +6,9 @@ public:
     {
         
         if(index >= t[i].size() ) return INT_MAX;
-        else if(i==n-1)
-            return t[n-1][index];
         else if(dp[i][index]!=-1) return dp[i][index];
+        else if(i==n-1)
+            return dp[i][index]=t[n-1][index];
         else
         {
             cout<<i<<" ";
