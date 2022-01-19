@@ -28,7 +28,12 @@ public:
         if(root==NULL) return true;
         else
         {
-            if(abs(height(root->left) - height(root->right)) <= 1) return (f(root->left) and f(root->right));
+            // if(abs(height(root->left) - height(root->right)) <= 1) return (f(root->left) and f(root->right));
+            if(f(root->left) and f(root->right))
+            {
+                if(abs(height(root->left) - height(root->right)) <= 1) return true;
+                    else return false;
+            }
             else return false;
         }
     }
