@@ -9,29 +9,31 @@
  */
 class Solution {
 public:
-    vector<TreeNode*> ans;
+    TreeNode* ans;
     unordered_map<TreeNode* , int> mp;
     
     bool dfs(TreeNode* root, TreeNode* target)
     {
-        // if(ans!=NULL)
-        //     return false;
+        if(ans!=NULL)
+            return false;
         if(root==NULL) return false;
         else if(root== target)
         {
             mp[target]++;
             if(mp[target]>=2)
-                ans.push_back(target);
+               { ans=target; }
             return true;
         }
         else
         {
             if(dfs(root->left,target) or dfs(root->right,target) == true)
             {
+                if(ans!=NULL) return false;
                 mp[root]++;
                 if(mp[root]>=2) 
                 {
-                    ans.push_back(root);
+                    ans=root;\
+                    // break;
                 }
                 return true;
             }
@@ -43,9 +45,9 @@ public:
     
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) 
     {
-        // ans=NULL;
+        ans=NULL;
         dfs(root,p);
         dfs(root,q);
-        return ans[0];
+        return ans;
     }
 };
