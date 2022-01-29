@@ -21,19 +21,23 @@ public:
         while(q.size()>0)
         {
             int m=q.size();
-            vector<int> v;
+            vector<int> v(m);
             for(int i=0;i<m;i++)
             {
                 TreeNode* node=q.front();
                 q.pop();
-                v.push_back(node->val);
+                // v.push_back(node->val);
+                if((x&1) !=0)
+                    v[m-1-i]= (node->val);
+                else
+                    v[i]=(node->val);
                 if(node->left !=NULL)
                     q.push(node->left);
                 if(node->right!= NULL)
                     q.push(node->right);
             }
-            if((x&1) !=0) //odd
-                reverse(v.begin(),v.end());
+            // if((x&1) !=0) //odd
+            //     reverse(v.begin(),v.end());
             ans.push_back(v);
             ++x;
         }
