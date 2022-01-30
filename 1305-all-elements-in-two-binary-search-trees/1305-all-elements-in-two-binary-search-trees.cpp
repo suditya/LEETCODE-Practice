@@ -11,26 +11,48 @@
  */
 class Solution {
 public:
-    multiset<int> s;
     
-    void dfs(TreeNode* root)
+    
+    void dfs(TreeNode* root,queue<int> &s)
     {
         if(root==NULL) return ;
         else
         {
             
-            dfs(root->left);
-            s.insert(root->val);
-            dfs(root->right);
+            dfs(root->left,s);
+            s.push(root->val);
+            dfs(root->right,s);
         }
     }
     
     vector<int> getAllElements(TreeNode* root1, TreeNode* root2) 
     {
+        queue<int> s,t;
         vector<int> ans;
-        dfs(root1) , dfs(root2);
-        for(auto x: s)
-            ans.push_back(x);
+        dfs(root1,s) ; dfs(root2,t);
+        while( (s.size() > 0 )and t.size() > 0 )
+        {
+            if(s.front() < t.front())
+            {
+                ans.push_back(s.front());
+                s.pop();
+            }
+            else
+            {
+               ans.push_back(t.front());
+                t.pop(); 
+            }
+        }
+        while(s.size() > 0)
+        {
+            ans.push_back(s.front());
+            s.pop();
+        }
+        while(t.size() > 0)
+        {
+            ans.push_back(t.front());
+            t.pop();
+        }
         return ans;
     }
 };
