@@ -13,7 +13,8 @@ class Solution:
                 else:
                     return bs(a,target,mid+1,j)
         for array in matrix:
-            index = bs(array,target,0,n-1)
-            if index == True:
-                return True 
+            if array[n-1]>=target:
+                index = bs(array,target,0,n-1)
+                if index == True:
+                    return True 
         return False
