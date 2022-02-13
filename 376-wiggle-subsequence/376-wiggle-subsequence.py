@@ -1,6 +1,10 @@
 class Solution:
+    # x=0
     def wiggleMaxLength(self, nums: List[int]) -> int:
+        
         def f(a,i,big,prev):
+            # global x
+            # x=x+1
             if i>=len(a):
                 return 0
             elif prev==-1:
@@ -11,6 +15,7 @@ class Solution:
                 # print("hi")
                 return dp[(i,big,prev)]
             else:
+                # print("5",end=",")
                 if big==True:
                     if a[i]>prev:
                         ans=max(f(a,i+1,False,a[i])+1,f(a,i+1,big,prev))
@@ -30,6 +35,7 @@ class Solution:
                         dp[(i,big,prev)]=ans
                         return ans
         dp={}
+        # print(len(nums))
         if len(nums)==1:
             return 1
         elif len(nums)==2:
