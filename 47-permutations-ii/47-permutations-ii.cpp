@@ -1,27 +1,28 @@
 class Solution {
 public:
-    set<vector<int>> ans;
-    
-    void dfs(vector<int>& a,vector<int> path,map<int,int> mp)
+    vector<vector<int>> ans;
+    int n;
+    void dfs(vector<int> path,map<int,int> mp)
     {
-        if(path.size()>=a.size())
+        if(path.size()>=n)
         {
-            ans.insert(path);
+            ans.push_back(path);
             return ;
         }
         else
         {
-            int prev=11;
-            for(int i=0;i<a.size();i++)
+           
+            for(auto i=mp.begin();i!=mp.end();i++)
             {
                 
-                if(mp[i]==0) //not taken
+                if(i->second >= 1) //not taken
                 {
-                    path.push_back(a[i]);
-                    mp[i]=1;
-                    dfs(a,path,mp);
+                    path.push_back(i->first);
+                    // mp[i]=1;
+                    i->second=i->second-1;
+                    dfs(path,mp);
                     path.pop_back();
-                    mp[i]=0;
+                    i->second=i->second+1;
                 }
             }
         }
@@ -31,10 +32,11 @@ public:
     {
         vector<int> path;
         map<int,int> mp;
-        for(int i=0;i<nums.size();i++) mp[i]=0;
-        sort(nums.begin(),nums.end());
-        dfs(nums,path,mp);
-        vector<vector<int>> v(ans.begin(),ans.end());
-        return v;
+        n=nums.size();
+        for(int i=0;i<nums.size();i++) mp[nums[i]]++;
+        // sort(nums.begin(),nums.end());
+        dfs(path,mp);
+        // vector<vector<int>> v(ans.begin(),ans.end());
+        return ans;
     }
 };
