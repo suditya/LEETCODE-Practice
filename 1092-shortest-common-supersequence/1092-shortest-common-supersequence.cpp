@@ -1,57 +1,69 @@
 class Solution {
 public:
-    string lcs(string str1, string str2, int m , int n) {
-        int dp[m+1][n+1];
-        
-        for(int i=0;i<=m;i++)
-            for(int j=0;j<=n;j++)
-                if(i==0 || j==0)
-                    dp[i][j] = 0;
-        
-        for(int i=1;i<=m;i++) {
-            for(int j=1;j<=n;j++) {
-                if(str1[i-1]==str2[j-1]) {
-                    dp[i][j] = 1+ dp[i-1][j-1];
-                } else {
-                    dp[i][j] = max(dp[i][j-1], dp[i-1][j]);
-                }
-            }
-        }
-        
-        int i=m,j=n;
-        string s;
-        while(i>0 && j>0) {
-            if(str1[i-1] == str2[j-1])
+    string f(string &s,string &t)
+    {
+        int n=s.size();
+        int m=t.size();
+        int lcs[n+1][m+1];
+        for(int i=0;i<=n;i++)
+        {
+            for(int j=0;j<=m;j++)
             {
-                s.push_back(str1[i-1]);
-                i--;
-                j--;
-            } else {
-                if(dp[i][j-1] > dp[i-1][j]) {
-                    s.push_back(str2[j-1]);
-                    j--;
-                } else {
-                    s.push_back(str1[i-1]);
-                    i--;
+                if(i==0 or j==0)
+                    lcs[i][j]=0;
+                else if(s[i-1]==t[j-1])
+                    lcs[i][j]=lcs[i-1][j-1]+1;
+                else
+                {
+                    lcs[i][j]=max(lcs[i-1][j],lcs[i][j-1]);
                 }
             }
         }
-        
-        while(i > 0) {
-            s.push_back(str1[i-1]);
-            i--;
+        // cout<<"hi1";
+        int row=n;
+        int col=m;
+        string res;
+        while(row>0 and col>0)
+        {
+            if(s[row-1]==t[col-1]) //both are equal
+            {
+                res.push_back(s[row-1]);
+                --row;
+                --col;
+            }
+            else
+            {
+                if(lcs[row-1][col]>lcs[row][col-1])
+                {
+                    res.push_back(s[row-1]);
+                    --row;
+                }
+                else
+                {
+                    res.push_back(t[col-1]);
+                    --col;
+                }
+            }
+        }
+        // cout<<"hey1";
+        while(row > 0)
+        {
+            res.push_back(s[row-1]);
+            --row;
+        }
+        while(col > 0)
+        {
+            res.push_back(t[col-1]);
+            --col;
         }
         
-        while(j > 0) {
-            s.push_back(str2[j-1]);
-            j--;
-        } 
-        
-        reverse(s.begin(), s.end());
-        return s;
+        reverse(res.begin(),res.end());
+        return res;
     }
+    
+    
     string shortestCommonSupersequence(string str1, string str2) 
     {
-        return lcs(str1,str2,str1.size(),str2.size());
+        return f(str1,str2);   
     }
 };
