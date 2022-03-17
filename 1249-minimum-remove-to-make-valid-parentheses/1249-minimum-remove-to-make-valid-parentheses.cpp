@@ -21,7 +21,7 @@ public:
                 ;
             }
         }
-        map<int,int> mp;
+        // map<int,int> mp;
         // for(auto x : st)
         // {
         //     mp[x.second]=1;
@@ -29,13 +29,14 @@ public:
         while(st.size()>0)
         {
             int index= st.top().second;
-            mp[index]=1;
+            // mp[index]=1;
+            s[index]='!';
             st.pop();
         }
         string newString;
         for(int i=0;i<n;i++)
         {
-            if(mp[i]==1)
+            if(s[i]=='!')
             {
                 ;
             }
