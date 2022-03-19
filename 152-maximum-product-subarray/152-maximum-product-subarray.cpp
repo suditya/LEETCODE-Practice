@@ -13,7 +13,7 @@ public:
             // cout<<tmax<<" "<<tmin<<"\n";
             maxi=tmax;
             mini=tmin;
-            ans=max({ans,tmax,tmin});
+            ans=max(ans,tmax);
         }
         // cout<<maxi<<" "<<mini;
         return ans;
