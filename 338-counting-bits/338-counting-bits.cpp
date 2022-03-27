@@ -4,18 +4,17 @@ public:
     {
         if(n==0)
             return {0};
-        if(n==1)
-            return {0,1};
-        vector<int> ans=countBits(n-1);
-        int count=0;
-        while(n)
+        // int dp[n+1];
+        vector<int> dp(n+1,0);
+        dp[0]=0;
+        int offset=1;
+        for(int i=1;i<=n;i++)
         {
-            if(n&1)
-                ++count;
-            n=n>>1;
+          if(offset*2 == i)
+            offset=offset*2;
+          dp[i]=dp[i-offset]+1;
         }
-        ans.push_back(count);
-        return ans;
+        return dp;
         
     }
 };
