@@ -3,8 +3,8 @@ public:
     map<int,int> dp;
     int f(int n)
     {
-        if(n<=1)
-            return n;
+        if(n==0)
+            return 0;
         // else if(n==1) return 1;
         // else if(dp[n]!=-1)
         //     return dp[n];
@@ -15,25 +15,18 @@ public:
         }
         else
         {
-            int two=1000000009,three=1000000009;
-            // if(n%2==0)
-                two=f((n/2))+n%2+1;
-            // if(n%3==0)
-                three=f(n/3)+n%3+1;
-            // one=f(n-1);
-            return dp[n]=min(two,three);
+            int one=1000000009,two=1000000009,three=1000000009;
+            if(n%2==0)
+                two=f(n-(n/2));
+            if(n%3==0)
+                three=f(n-(2*(n/3)));
+            if(n%2!=0 || n%3!=0)
+            one=f(n-1);
+            return dp[n]=min({one,two,three})+1;
         }
     }
-    
-    int minDays(int n) 
-    {
-        // memset(dp,-1,sizeof(dp));
-        // 666666666
-        // int dp[n+1];
-        // map<int,int> dp;
-        // dp[0]=0;
-        // dp[1]=1;
-        
+    int minDays(int n) {
         return f(n);
+        
     }
 };
