@@ -11,6 +11,7 @@
  */
 class Solution {
 public:
+    map<int,vector<TreeNode*>> dp;
     vector<TreeNode*> f(int n)
     {
         if(n==1)
@@ -18,7 +19,12 @@ public:
             TreeNode* root= new TreeNode(0);
             vector<TreeNode*> v;
             v.push_back(root);
-            return v;
+            return dp[n]=v;
+        }
+        else if(dp.find(n)!=dp.end())
+        {
+            // cout<<"hey";
+            return dp[n];
         }
         else
         {
@@ -38,7 +44,7 @@ public:
                     }
                 }
             }
-            return ans;
+            return dp[n]=ans;
         }
     }
     
