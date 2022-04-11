@@ -41,9 +41,9 @@ public:
         {
             for(int j=i+1;j<n;j++)
             {
-                if(isConnected[i][j]==1)
+                if(isConnected[i][j]==1 and j>i)
                 {
-                    cout<<i<<" "<<j<<"\n";
+                    // cout<<i<<" "<<j<<"\n";
                     _union(i,j);
                 }
             }
