@@ -11,52 +11,37 @@
  */
 class Solution {
 public:
-    vector<int> v;
-    map<int,int> mp;
-    void levelTraversal(TreeNode* root)
+    int totalSum;
+    int sumAllNodes(TreeNode* root)
     {
-        if(root==NULL)
-        {
-            return ;
-        }
+        if(root==NULL) return 0;
         else
         {
-            levelTraversal(root->left);
-            v.push_back(root->val);
-            levelTraversal(root->right);
+            return (sumAllNodes(root->left)+sumAllNodes(root->right)+(root->val));
         }
-    }
+    }    
     
-    void f(TreeNode* root)
+    void levelTraversal(TreeNode* root)
     {
         if(root==NULL) return ;
         else
         {
-            root->val=mp[root->val];
-            f(root->left);
-            f(root->right);
+            
+            // cout<<(root->val)<<" "<<currSum<<"\n";
+            levelTraversal(root->left);
+            // cout<<(root->val)<<" "<<totalSum<<"\n";
+            int temp=root->val;
+            root->val=totalSum;
+            totalSum-=temp;
+            levelTraversal(root->right);
+            // cout<<(root->val)<<" "<<currSum<<"\n";
         }
     }
     
     TreeNode* convertBST(TreeNode* root) 
     {
+        totalSum=sumAllNodes(root);
         levelTraversal(root);
-        int n=v.size();
-        int lSum=0,rSum=0;
-        for(int i=0;i<n;i++)
-        {
-            rSum+=v[i];
-        }
-        
-        for(int i=0;i<n;i++)
-        {
-            lSum+=v[i];
-            rSum-=v[i];
-            // cout<<
-            mp[v[i]]=rSum+v[i];
-            // cout<<v[i]<<" "<<mp[v[i]]<<"\n";
-        }
-        f(root);
         return root;
     }
 };
