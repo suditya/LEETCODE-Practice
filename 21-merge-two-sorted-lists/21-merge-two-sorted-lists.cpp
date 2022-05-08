@@ -11,17 +11,20 @@
 class Solution {
 public:
     ListNode* f( ListNode* l1, ListNode* l2){
-          if(l1==NULL)return l2;
+        if(l1==NULL)return l2;
         if(l2==NULL)return l1;
-          ListNode*h1 = l1;
+        ListNode*h1 = l1;
         ListNode*h2 = l2;
-         if(h1->val<=h2->val){
+        if(h1->val<=h2->val){
             h1->next = f(h1->next,h2);
-         }
-         else{
+            return h1;
+        }
+        else{
             h2->next =  f(  h1,h2->next);
-         }
-         if(l1->val<=l2->val)return l1;
+            return h2;
+        }
+        if(l1->val<=l2->val)
+            return l1;
          return l2;
      }
     
