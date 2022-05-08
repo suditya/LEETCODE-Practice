@@ -17,10 +17,16 @@ public:
             return head;
         else
         {
-           ListNode* h=reverseList(head->next);
-           head->next->next=head;
-           head->next=NULL;
-           return h;
+            ListNode* prev=NULL;
+            ListNode* curr=head;
+            while(curr!=nullptr)
+            {
+                ListNode* temp=curr->next;
+                curr->next=prev;
+                prev=curr;
+                curr=temp;
+            }
+            return prev;
         }
         
     }
