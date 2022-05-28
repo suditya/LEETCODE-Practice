@@ -8,7 +8,7 @@ public:
         if(ans.size()>0) return ;
         if(n==0)
         {
-            cout<<path<<" ";
+            // cout<<path<<" ";
             if(mp.find(path)==mp.end()) //doesnt exist
             {
                 ans=path;
