@@ -1,39 +1,14 @@
 class Solution {
 public:
-    int limit;
-    string ans;
-    map<string,int>  mp;
-    void f(int n,string path)
-    {
-        if(ans.size()>0) return ;
-        if(n==0)
-        {
-            // cout<<path<<" ";
-            if(mp.find(path)==mp.end()) //doesnt exist
-            {
-                ans=path;
-            }
-            return ;
-        }
-        else
-        {
-            path.push_back('1');
-            f(n-1,path);
-            path.pop_back();
-            path.push_back('0');
-            f(n-1,path);
-            return ;
-        }
-    }
+    
     
     string findDifferentBinaryString(vector<string>& nums) 
     {
         
-        for(auto s:nums)
-            mp[s]++;
-        limit=nums[0].size();
-        string path;
-        f(limit,path);
+       string ans="";
+        for(int i=0; i<nums.size(); i++) 
+            ans+= nums[i][i]=='0' ? '1' : '0';          // Using ternary operator
+			// ans+=to_string(1-(nums[i][i]-'0'));     // Alternate:  or use to_string & 1-x to flip
         return ans;
     }
 };
