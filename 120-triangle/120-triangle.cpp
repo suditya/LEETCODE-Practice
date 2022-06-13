@@ -1,31 +1,21 @@
 class Solution {
 public:
-    int n;
-    int dp[205][207];
-    int f(int i, int index,vector<vector<int>>& t)
+    // int dp[400][400];
+    map<pair<int,int>,int> dp;
+    int f(vector<vector<int>>& a,int r,int c)
     {
-        if(dp[i][index]!=-1) return dp[i][index];
-        if(index >= t[i].size() ) return INT_MAX;
-        
-        else if(i==n-1)
-            return dp[i][index]=t[n-1][index];
+        if(r==a.size()) return 0;
+        // else if(dp[r][c]!=-10005) return dp[r][c];
+        else if(dp.find({r,c})!=dp.end()) return dp[{r,c}];
         else
         {
-            cout<<i<<" ";
-            return dp[i][index]=(t[i][index]+min(f(i+1,index,t),f(i+1,index+1,t)));
+            return dp[{r,c}]=min(f(a,r+1,c),f(a,r+1,c+1))+a[r][c];
         }
     }
     
     int minimumTotal(vector<vector<int>>& triangle) 
     {
-        cout<<"\n";
-        for(int i=0;i<205;i++)
-        {
-            for(int j=0;j<207;j++)
-                dp[i][j]=-1;
-        }
-        n=triangle.size();
-        
-        return f(0,0,triangle);
+        // memset(dp,-10005,sizeof(dp));
+        return f(triangle,0,0);   
     }
 };
