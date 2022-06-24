@@ -43,13 +43,15 @@ public:
             {
                 if(open>0)
                 {
+                    for(int i=0;i<open;i++)
                     path.push_back('(');
-                    generate(open-1,close,path);
+                    generate(0,close,path);
                 }
                 else
                 {
+                    for(int i=0;i<close;i++)
                     path.push_back(')');
-                    generate(open,close-1,path);
+                    generate(open,0,path);
                 }
             }
         }
