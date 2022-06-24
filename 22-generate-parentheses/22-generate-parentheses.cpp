@@ -1,0 +1,65 @@
+class Solution {
+public:
+    bool isValid(string s) {
+    stack<char> st;
+    for(char c : s){
+        if(c == '('){
+            st.push(c);
+        }else{
+            if(st.empty()) return false;
+            if(c == ')' && st.top() != '(') return false;
+            st.pop();
+        }
+    }
+    return st.empty();
+    }
+    
+    vector<string> para;
+    
+    void generate(int open,int close,string path)
+    {
+        if(open==0 and close==0)
+        {
+            // cout<<path<<" ";
+            para.push_back(path);
+            return ;
+        }
+        else
+        {
+            if(open>0 and close>0)
+            {
+                path.push_back('(');
+                generate(open-1,close,path);
+                path.pop_back();
+                path.push_back(')');
+                generate(open,close-1,path);
+            }
+            else
+            {
+                if(open>0)
+                {
+                    path.push_back('(');
+                    generate(open-1,close,path);
+                }
+                else
+                {
+                    path.push_back(')');
+                    generate(open,close-1,path);
+                }
+            }
+        }
+    }
+    
+    vector<string> generateParenthesis(int n) 
+    {
+        string path;
+        generate(n,n,path);
+        vector<string> ans;
+        for(auto s:para)
+        {
+            if(isValid(s)==true)
+                ans.push_back(s);
+        }
+        return ans;
+    }
+};
