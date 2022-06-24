@@ -1,53 +1,46 @@
 class Solution {
 public:
-    vector<int> s;
-    bool topo(int x, vector<int> adj[] , vector<int>& vis)
+    vector<int> ans;
+    bool topoSort(int node,vector<int> adj[],vector<int>& vis,vector<int> &cycle)
     {
-        // if(vis[x]==1) return false;
-        // else
+        if(cycle[node]==1) return false; //node exist in cycle
+        else if(vis[node]==1) return true; //already visited but not in cycle
+        else
         {
-            vis[x]=1;
-            for(auto i:adj[x])
+            vis[node]=1; //visiting the node
+            cycle[node]=1; //putting the node in cycle
+            for(auto i:adj[node])
             {
-                if(vis[i]==0){
-                    if( topo(i,adj,vis) == false )
+                // if(vis[i]==0)
+                {
+                    if(topoSort(i,adj,vis,cycle)==false)
                         return false;
                 }
-                if(vis[i]==1)
-                    return false;
             }
-            vis[x]=2;
-            s.push_back(x);
+            ans.push_back(node);
+            cycle[node]=0;
             return true;
         }
-       
-         
     }
     
-    vector<int> findOrder(int n, vector<vector<int>>& p) 
+    vector<int> findOrder(int numCourses, vector<vector<int>>& pre) 
     {
-        vector<int> adj[n];
-        vector<int> vis(n,0);
-        for(int i=0;i<p.size();i++)
+        vector<int> adj[numCourses+1];
+        for(auto v:pre)
         {
-            vector<int> v=p[i];
             adj[v[0]].push_back(v[1]);
         }
-        for(int i=0;i<n;i++)
+        vector<int> vis(numCourses+1,0);
+        
+        for(int i=0;i<numCourses;i++)
         {
-            if(vis[i]==0){
-            if(topo(i,adj,vis)==false)
-                return {};
-            }
+            if(vis[i]==0)
+            {
+                vector<int> cycle(numCourses+1,0);
+                if(topoSort(i,adj,vis,cycle)==false)
+                    return {};
+            }   
         }
-        
-        // vector<int> ans;
-        // while(s.size()!=0)
-        // {
-        //     ans.push_back(s.top());
-        //     s.pop();
-        // }
-        return s;
-        
+        return ans;
     }
 };
