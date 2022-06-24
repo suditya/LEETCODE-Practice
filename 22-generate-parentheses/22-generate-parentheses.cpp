@@ -26,7 +26,7 @@ public:
         }
         else
         {
-            if(path.size()==0)
+            if(path.size()==0 or (open==close))
             {
                 path.push_back('(');
                 generate(open-1,close,path);
