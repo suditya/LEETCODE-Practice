@@ -20,13 +20,18 @@ public:
     {
         if(open==0 and close==0)
         {
-            // cout<<path<<" ";
+            if(path[0]!=')' and path[path.size()-1]!='(')
             para.push_back(path);
             return ;
         }
         else
         {
-            if(open>0 and close>0)
+            if(path.size()==0)
+            {
+                path.push_back('(');
+                generate(open-1,close,path);
+            }
+            else if(open>0 and close>0)
             {
                 path.push_back('(');
                 generate(open-1,close,path);
