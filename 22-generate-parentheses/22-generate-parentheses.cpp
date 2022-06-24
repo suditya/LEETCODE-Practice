@@ -21,7 +21,7 @@ public:
         if(open==0 and close==0)
         {
             if(path[0]!=')' and path[path.size()-1]!='(')
-            para.push_back(path);
+            para.push_back(move(path));
             return ;
         }
         else
