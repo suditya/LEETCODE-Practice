@@ -2,26 +2,46 @@ class Solution {
 public:
     int row;
     int col;
-    string s;
     
-    bool exist(vector<vector<char>>& board, string word) {
-    for (unsigned int i = 0; i < board.size(); i++) 
-        for (unsigned int j = 0; j < board[0].size(); j++) 
-            if (dfs(board, i, j, word))
-                return true;
-    return false;
-}
-
-bool dfs(vector<vector<char>>& board, int i, int j, string& word) {
-    if (!word.size())
-        return true;
-    if (i<0 || i>=board.size() || j<0 || j>=board[0].size() || board[i][j] != word[0])  
+    bool backtrack(vector<vector<char>>& b, string &s,int x,int y,int i=0)
+    {
+        if(i>=s.size()) return true;
+        if(x<0 or y<0 or x>=row or y>=col ) return false;
+        if(b[x][y]!=s[i] or b[x][y]=='#') 
+        {
+            // cout<<b[x][y]<<" "<<s[i]<<"\n";
+            return false;
+        }
+        else
+        {
+            char temp=b[x][y];
+            // cout<<temp<<" "<<x<<" "<<y<<"\n";
+            b[x][y]='#';
+            if(backtrack(b,s,x+1,y,i+1)) return true;
+            if(backtrack(b,s,x-1,y,i+1)) return true;
+            if(backtrack(b,s,x,y+1,i+1)) return true;
+            if(backtrack(b,s,x,y-1,i+1)) return true;
+            b[x][y]=temp;
+            return false;
+        }
+    }
+    
+    bool exist(vector<vector<char>>& board, string word) 
+    {
+        row=board.size();
+        col=board[0].size();
+        for(int i=0;i<row;i++)
+        {
+            for(int j=0;j<col;j++)
+            {
+                if(board[i][j]==word[0])
+                {
+                    // cout<<"hi";
+                    if(backtrack(board,word,i,j)==true)
+                        return true;
+                }
+            }
+        }
         return false;
-    char c = board[i][j];
-    board[i][j] = '*';
-    string s = word.substr(1);
-    bool ret = dfs(board, i-1, j, s) || dfs(board, i+1, j, s) || dfs(board, i, j-1, s) || dfs(board, i, j+1, s);
-    board[i][j] = c;
-    return ret;
-}
+    }
 };
