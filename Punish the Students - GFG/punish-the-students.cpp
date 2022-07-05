@@ -9,6 +9,7 @@ class Solution{
     {
         int swaps=0;
         int totalMark=0;
+        bool swapped=false;
         for(int i=0;i<n;i++)
         {
            
@@ -17,9 +18,12 @@ class Solution{
                 if(roll[j]>roll[j+1])
                 {
                     ++swaps;
+                    swapped =true;
                     swap(roll[j],roll[j+1]);
                 }
             }
+            if(swapped==false) break;
+            swapped=false;
         }
         for(int i=0;i<n;i++)
              totalMark+=marks[i];
