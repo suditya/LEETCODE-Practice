@@ -1,39 +1,39 @@
 class Solution {
 public:
     int a, b , c;
-    int dp[102][102][202];
+    int dp[102][102];
     bool f(string s1, string s2, string s3,int i,int j,int k)
     {
         if(i==a and b==j)
         {
             return true;
         }
-        else if(dp[i][j][k]!=-1) return dp[i][j][k];
+        else if(dp[i][j]!=-1) return dp[i][j];
         else if(i==a)
         {
-            if(s2[j]==s3[k]) return dp[i][j][k]=f(s1,s2,s3,i,j+1,k+1);
-            else return dp[i][j][k]=false;
+            if(s2[j]==s3[k]) return dp[i][j]=f(s1,s2,s3,i,j+1,k+1);
+            else return dp[i][j]=false;
         }
         else if(j==b)
         {
-           if(s1[i]==s3[k]) return dp[i][j][k]=f(s1,s2,s3,i+1,j,k+1);
-           else return dp[i][j][k]=false;
+           if(s1[i]==s3[k]) return dp[i][j]=f(s1,s2,s3,i+1,j,k+1);
+           else return dp[i][j]=false;
         }
         else
         {
             if(s1[i]==s3[k]  and s2[j]==s3[k])
             {
-                return dp[i][j][k]=(f(s1,s2,s3,i+1,j,k+1)|f(s1,s2,s3,i,j+1,k+1));
+                return dp[i][j]=(f(s1,s2,s3,i+1,j,k+1)|f(s1,s2,s3,i,j+1,k+1));
             }
             else if(s1[i]==s3[k])
             {
-                return dp[i][j][k]=f(s1,s2,s3,i+1,j,k+1);
+                return dp[i][j]=f(s1,s2,s3,i+1,j,k+1);
             }
             else if(s2[j]==s3[k])
             {
-                return dp[i][j][k]=f(s1,s2,s3,i,j+1,k+1);
+                return dp[i][j]=f(s1,s2,s3,i,j+1,k+1);
             }
-            else return dp[i][j][k]=false;
+            else return dp[i][j]=false;
         }
         
     }
