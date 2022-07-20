@@ -1,46 +1,20 @@
 class Solution {
 public:
-    
-    unordered_map<string,bool> dp;
-    
-    bool f(string &s,string &t,int n,int m,int i,int j)
-    {
-        
-        if(i==n) return true;
-        else if(j==m) return false;
-        else
-        {
-            // cout<<"hi";
-            // cout<<i<<" "<<j<<"\n";
-            if(s[i]==t[j])
-            {
-                return f(s,t,n,m,i+1,j+1);
+    int numMatchingSubseq(string& s, vector<string>& words) {
+        int ans = 0;
+        vector<vector<int>> mappings(26);  // stores array of indices for each character in s
+        for(int i = 0; i < size(s); i++) mappings[s[i] - 'a'].push_back(i);
+        for(auto& word : words) {
+            bool found = true;
+            // i = index in word | prev = index in s matched for word[i-1]
+            for(int i = 0, prev = -1; found && i < size(word); i++) {
+                auto& v = mappings[word[i]-'a'];
+                auto it = upper_bound(begin(v), end(v), prev);   // check if current character exists in s with index > prev
+                if(it == end(v)) found = false;                  // doesn't exist
+                else prev = *it;                                 // update prev for next check
             }
-            else return f(s,t,n,m,i,j+1);
+            ans += found;
         }
-    }
-    
-    
-    int numMatchingSubseq(string s, vector<string>& words) 
-    {
-        // string path;
-        // n=s.size();
-        // subsequences(s,0,path);
-        int count=0;
-        int m=s.size();
-        for(auto& word : words)
-        {
-            int n=word.size();
-            if(dp.find(word)!=dp.end())
-            {
-                if(dp[word]==true) ++count;
-            }
-            else
-            {
-                dp[word]=f(word,s,n,m,0,0);
-                if(dp[word]==true) ++count;
-            }
-        }
-        return count;
+        return ans;
     }
 };
