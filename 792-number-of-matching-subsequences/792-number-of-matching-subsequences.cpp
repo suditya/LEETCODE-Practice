@@ -28,7 +28,7 @@ public:
         // subsequences(s,0,path);
         int count=0;
         int m=s.size();
-        for(auto word : words)
+        for(auto& word : words)
         {
             int n=word.size();
             if(dp.find(word)!=dp.end())
