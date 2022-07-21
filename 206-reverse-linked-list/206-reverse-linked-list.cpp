@@ -12,10 +12,20 @@ class Solution {
 public:
     ListNode* reverseList(ListNode* head) 
     {
-        if(head==NULL or head->next==NULL) return head;
-        ListNode *reversed=reverseList(head->next);
-        head->next->next=head;
-        head->next=NULL;
-        return reversed;
+        ListNode* curr;
+        ListNode* nextEle=NULL;
+        ListNode* prev;
+        prev=NULL, curr=head;
+        while(curr!=NULL)
+        {
+            // cout<<(prev->val)<<" "<<(curr->val)<<" "<<(nextEle->val)<<"\n";
+            nextEle=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=nextEle;
+        }
+        
+        return prev;
+        
     }
 };
