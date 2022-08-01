@@ -1,7 +1,7 @@
 class Solution {
 public:
     int uniquePaths(int m, int n) {
-        
+        //using combinations nCr formula
         int nn = m+n-2;
         int rr = min(m-1,n-1);
         double ans = 1;
