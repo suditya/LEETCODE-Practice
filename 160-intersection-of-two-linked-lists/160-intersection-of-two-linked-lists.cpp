@@ -22,9 +22,9 @@ public:
             l2+=1;
             t2=t2->next;
         }
-        if (t1!=t2){
-            return NULL;
-        }
+        // if (t1!=t2){
+        //     return NULL;
+        // }
         int move1 = max(0,l1-l2);
         int move2 = max(0,l2-l1);
         while (move1>0){
