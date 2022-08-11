@@ -1,30 +1,35 @@
 class Solution {
 public:
     vector<vector<int>> ans;
-    
-    void dfs(vector<int>& a,int i, vector<int> path)
+    int n;
+    void f(vector<int>& a,vector<int> path,int i=0)
     {
-        if(i>=a.size())
+        if(i==n)
         {
             ans.push_back(path);
         }
         else
         {
-            auto temp=path;
             path.push_back(a[i]);
-            dfs(a,i+1,path);
-            int x=i;
-            while(x<a.size() and a[i]==a[x]  )
-                ++x;
-            dfs(a,x,temp);
+            f(a,path,i+1);
+            path.pop_back();
+            int j=i;
+            while(j<n)
+            {
+                if(a[j]!=a[i]) break;
+                else ++j;
+            }
+            f(a,path,j);
         }
     }
+    
     
     vector<vector<int>> subsetsWithDup(vector<int>& nums) 
     {
         sort(nums.begin(),nums.end());
+        n=nums.size();
         vector<int> path;
-        dfs(nums,0,path);
+        f(nums,path);
         return ans;
     }
 };
