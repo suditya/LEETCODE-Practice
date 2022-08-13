@@ -1,30 +1,38 @@
 class Solution {
 public:
-   vector<vector<int> > combinationSum2(vector<int> &num, int target) 
+    vector<vector<int>> ans;
+    int n;
+    void f(vector<int>& a, int target , vector<int> &path, int i)
     {
-        vector<vector<int>> res;
-        sort(num.begin(),num.end());
-        vector<int> local;
-        findCombination(res, 0, target, local, num);
-        return res;
-    }
-    void findCombination(vector<vector<int>>& res, const int order, const int target, vector<int>& local, const vector<int>& num)
-    {
-        if(target==0)
-        {
-            res.push_back(local);
-            return;
-        }
+        // cout<<i<<" ";
+        if(target==0) { /*cout<<"  pushed  ";*/ ans.push_back(path); return ;}
+        else if(i>=n) return ;
         else
         {
-            for(int i = order;i<num.size();i++) // iterative component
+            if(a[i] > target ) return ;
+            else
             {
-                if(num[i]>target) return;
-                if(i&&num[i]==num[i-1]&&i>order) continue; // check duplicate combination
-                local.push_back(num[i]),
-                findCombination(res,i+1,target-num[i],local,num); // recursive componenet
-                local.pop_back();
+                // cout<<i<<" ";
+                path.push_back(a[i]);
+                f(a, target-a[i], path , i+1);
+                path.pop_back();
+                int j=i;
+                while(j<n and a[j]==a[i])
+                {
+                    ++j;
+                }
+                f(a, target , path , j);    
             }
         }
+            
+    }
+    
+    vector<vector<int>> combinationSum2(vector<int>& a, int target) 
+    {
+        sort(a.begin(),a.end());
+        n=a.size();
+        vector<int> path;
+        f(a, target ,path, 0);   
+        return ans;
     }
 };
