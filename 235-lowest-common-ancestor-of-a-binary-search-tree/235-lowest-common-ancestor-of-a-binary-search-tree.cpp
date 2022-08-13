@@ -16,6 +16,8 @@ public:
         if(root==p or root==q) return root;
         else
         {
+            if(root->val > p->val and root->val > q->val) return lowestCommonAncestor(root->left, p , q);
+            if(root->val < p->val and root->val < q->val) return lowestCommonAncestor(root->right, p , q);
             auto lefty=lowestCommonAncestor(root->left,p,q);
             auto righty=lowestCommonAncestor(root->right,p,q);
             if(lefty!=NULL and righty!=NULL) return root;
