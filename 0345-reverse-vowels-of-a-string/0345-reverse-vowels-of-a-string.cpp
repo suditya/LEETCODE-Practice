@@ -6,24 +6,29 @@ public:
     }
     
     string reverseVowels(string s) {
-        stack<char> st;
-        for(auto& c:s)
+       
+        int i=0;
+        int j=s.size()-1;
+        
+        while(i<j)
         {
-            if( isVowel(c) == true)
+            while( isVowel(s[i]) == false and i<s.size()-1)
             {
-                st.push(c);
-                c='*';
+                ++i;
             }
-        }
-        for(auto& c:s)
-        {
-            if( c=='*')
+            while( isVowel(s[j]) == false and j>0)
             {
-                char x = st.top(); st.pop();
-                c=x;
+                --j;
             }
+            
+            if(i<j) swap(s[i],s[j]);
+            
+            ++i;
+            --j;
+            
         }
         
         return s;
+        
     }
 };
