@@ -1,6 +1,6 @@
 # Sort a stack
 ## Easy
-<div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given a stack, the task is to sort&nbsp;it such that the top of the stack has the greatest&nbsp;element.</span></p>
+<div class="problems_problem_content__Xm_eO" bis_skin_checked="1"><p><span style="font-size:18px">Given a stack, the task is to sort&nbsp;it such that the top of the stack has the greatest&nbsp;element.</span></p>
 
 <p><span style="font-size:18px"><strong>Example 1:</strong></span></p>
 
